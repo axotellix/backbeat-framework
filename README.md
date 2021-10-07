@@ -1,1 +1,1 @@
-# backbeat-framework
+# Backbeat - PHP backend-framework
