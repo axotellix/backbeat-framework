@@ -7,7 +7,7 @@ require($conn_path);
 
 class Schema {
 
-    // [ PRESETS ]
+    // ---------- [ PRESETS ] ---------- 
 
     // [ SQL presets ]
     private const SQL_TYPES = [
@@ -38,7 +38,7 @@ class Schema {
     ];           
 
 
-    // [ METHODS ]
+    // ---------- [ METHODS ] ---------- 
 
     // [ DB table connection methods ]
      //@ set > DB table
