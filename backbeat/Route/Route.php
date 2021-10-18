@@ -6,8 +6,12 @@ namespace Backbeat;
 // ---------- [ GLOBAL METHODS: helpers ] ---------- 
 
 //@ make > full path to View
-function make_path( string $v ) {
-    return __DIR__ . '/../../app/MVC/views/' . $v . '.php';
+function make_path( string $v, bool $extention = true ) {
+    if( $extention ) {
+        return __DIR__ . '/../../app/MVC/views/' . $v . '.php';
+    } else {
+        return __DIR__ . '/../../app/MVC/views/' . $v;
+    }
 }
 
 

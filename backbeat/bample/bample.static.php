@@ -54,7 +54,8 @@
 <body>
     
     <!-- [ HEADER ] -->
-    <? require_once("C:/Soft/XAMPP/htdocs/PHP/backbeat/backbeat/Route/../../app/MVC/views/pages" . '/../components/Header.php') ?>
+    <? require_once("C:/Soft/XAMPP/htdocs/PHP/backbeat/backbeat/Route/../../app/MVC/views/components/Header.php") ?>
+
 
     <!-- [ MAIN ] -->
     <main>

@@ -54,7 +54,8 @@
 <body>
     
     <!-- [ HEADER ] -->
-    <? require_once(__DIR__ . '/../components/Header.php') ?>
+    @component('Header')
+
 
     <!-- [ MAIN ] -->
     <main>

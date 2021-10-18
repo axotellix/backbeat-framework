@@ -10,16 +10,49 @@ abstract class Bample {
 
     // [ PRESETS ]
 
-    protected static $static = __DIR__ . '/bample.static.php';      //: keep > static file path
-    protected static $ctx    = '';                                  //: keep > static file content
+    protected static $static = __DIR__ . '/bample.static.php';      //: static file path
+    protected static $ctx    = '';                                  //: static file content
+
+    // [ paths to files ]
+    protected static $components = 'components/';   //: full path to components for prefixing includes
 
 
 
     // [ METHODS: helpers ]
 
-    //@ replace > Bample syntax
-    protected static function processSyntax( $ctx ) {
+    //@ init > constants
+    protected static function initConst() {
+        self::$components = make_path(self::$components, false);
+    }
 
+
+
+    // [ METHODS: Syntax processing ]
+
+    //@ process > includes
+    protected static function processIncludes( $ctx ) {
+
+        while( strpos($ctx, '@component') > -1 ) {
+
+            $param_start = strpos( $ctx , '@component(' ) + 12;
+            $param_end   = strpos( $ctx , ')' , $param_start) - $param_start - 1;
+            $param = substr( $ctx , $param_start, $param_end );
+            $param = self::$components . $param . '.php';
+            $param = '"' . $param . '"';
+            $param = str_replace('\\', '/', $param);
+            $ctx = preg_replace( "/@component(.*)/" , "<? require_once($param) ?>" , $ctx , 1);
+
+        }
+
+        return $ctx;
+    }
+
+    //@ replace > Bample syntax
+    public static function processSyntax( $ctx ) {
+        self::initConst();
+        $ctx = self::processIncludes( $ctx );
+
+        return $ctx;
     }
 
 
@@ -41,6 +74,9 @@ abstract class Bample {
 
         // replace > DIR constants ( change static file location to requested page`s one )
         self::$ctx = preg_replace( '/__DIR__/' , $path , self::$ctx );
+
+        // replace > Bample syntax
+        self::$ctx = self::processSyntax( self::$ctx );
 
         // save > new content to static file
         file_put_contents( self::$static , self::$ctx );

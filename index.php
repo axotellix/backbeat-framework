@@ -18,11 +18,8 @@
     // check > if requested View NOT found
     check_404();
 
+    // require > static file ( page container )
     Bample::requireStatic();
-    //require_once('backbeat/bample/bample.static.php');
-
-
-    //Bample();
 
 
 ?>
