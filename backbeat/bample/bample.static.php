@@ -55,6 +55,7 @@
     
     <!-- [ HEADER ] -->
     <? require_once("C:/Soft/XAMPP/htdocs/PHP/backbeat/backbeat/Route/../../app/MVC/views/components/Header.php") ?>
+    <? require_once("C:/Soft/XAMPP/htdocs/PHP/backbeat/backbeat/Route/../../app/MVC/views/components/Footer.php") ?>
 
 
     <!-- [ MAIN ] -->

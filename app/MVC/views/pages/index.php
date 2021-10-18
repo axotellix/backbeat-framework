@@ -55,6 +55,7 @@
     
     <!-- [ HEADER ] -->
     @component('Header')
+    @include('components/Footer')
 
 
     <!-- [ MAIN ] -->

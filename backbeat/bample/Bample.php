@@ -14,7 +14,8 @@ abstract class Bample {
     protected static $ctx    = '';                                  //: static file content
 
     // [ paths to files ]
-    protected static $components = 'components/';   //: full path to components for prefixing includes
+    protected static $path_components = 'components/';   //: full path to components for prefixing includes
+    protected static $path_views      = '';              //: full path to views for prefixing includes
 
 
 
@@ -22,7 +23,8 @@ abstract class Bample {
 
     //@ init > constants
     protected static function initConst() {
-        self::$components = make_path(self::$components, false);
+        self::$path_views      = make_path(self::$path_views, false);
+        self::$path_components = make_path(self::$path_components, false);
     }
 
 
@@ -32,15 +34,29 @@ abstract class Bample {
     //@ process > includes
     protected static function processIncludes( $ctx ) {
 
+        // process > components includes
         while( strpos($ctx, '@component') > -1 ) {
 
             $param_start = strpos( $ctx , '@component(' ) + 12;
             $param_end   = strpos( $ctx , ')' , $param_start) - $param_start - 1;
             $param = substr( $ctx , $param_start, $param_end );
-            $param = self::$components . $param . '.php';
+            $param = self::$path_components . $param . '.php';
             $param = '"' . $param . '"';
             $param = str_replace('\\', '/', $param);
             $ctx = preg_replace( "/@component(.*)/" , "<? require_once($param) ?>" , $ctx , 1);
+
+        }
+
+        // process > simple includes
+        while( strpos($ctx, '@include') > -1 ) {
+
+            $param_start = strpos( $ctx , '@include(' ) + 10;
+            $param_end   = strpos( $ctx , ')' , $param_start) - $param_start - 1;
+            $param = substr( $ctx , $param_start, $param_end );
+            $param = self::$path_views . $param . '.php';
+            $param = '"' . $param . '"';
+            $param = str_replace('\\', '/', $param);
+            $ctx = preg_replace( "/@include(.*)/" , "<? require_once($param) ?>" , $ctx , 1);
 
         }
 
