@@ -3,6 +3,14 @@
 namespace Backbeat;
 
 
+// ---------- [ GLOBAL METHODS: helpers ] ---------- 
+
+//@ make > full path to View
+function make_path( string $v ) {
+    return __DIR__ . '/../../app/MVC/views/' . $v . '.php';
+}
+
+
 // ---------- [ GLOBAL METHODS: View ] ---------- 
 
 //@ check > if View exists
@@ -11,7 +19,7 @@ function check_404( string $v = null ) {
     //? if > no View passed - get route from URL
     $v = ($v === null) 
         //crutch: if > index pgae requested (set "/" to "index") 
-        ? str_replace( '/.php' , 'index.php' , __DIR__ . '/../../app/MVC/views/pages/' . Route::getURI() . '.php' ) 
+        ? str_replace( '.php.php', '.php', str_replace( '/.php' , 'index.php' , make_path('pages/' . Route::getURI()) ) ) 
         : $v
     ;
 
@@ -19,8 +27,8 @@ function check_404( string $v = null ) {
     if( !file_exists($v) ) {
 
         // return > View ( 404 page )
-        $v = __DIR__ . '/../../app/MVC/views/404.php';
-        require_once $v;
+        $v = make_path('404');
+        Bample::setStatic( $v );
 
         // set > Status code to 404
         Route::setStatus(404);
@@ -36,7 +44,7 @@ function check_404( string $v = null ) {
 function view( string $view_name , array $view_data = [] ) {
         
     // prefix > view name with full path to Views
-    $view_name = __DIR__ . '/../../app/MVC/views/' . $view_name . '.php';
+    $view_name = make_path($view_name);
 
     //? if > view NOT found ( 404 page )
     if( check_404($view_name) ) return;
@@ -48,10 +56,10 @@ function view( string $view_name , array $view_data = [] ) {
     ];
 
     // return > View (with data)
-    require_once $view['view'];
-    //return $view;
+    Bample::setStatic( $view['view'] );
 
 }
+
 
 
 // ---------- [ "ROUTE" CLASS ] ---------- 
