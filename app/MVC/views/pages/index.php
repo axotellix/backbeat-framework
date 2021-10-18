@@ -55,16 +55,22 @@
     
     <!-- [ HEADER ] -->
     @component('Header')
-    @include('components/Footer')
-
-
+    
     <!-- [ MAIN ] -->
     <main>
-
+        
         <h1> Backbeat. Home </h1>
         <p>a simple PHP backend-framework</p>
 
+        <? $stack = ['html', 'js', 'sass'] ?>
+        @foreach( $stack as $value )
+            <span> { $value } </span>
+        @endforeach
+        
     </main>
+    
+    <!-- [ FOOTER ] -->
+    @include('components/Footer')
 
 </body>
 </html>

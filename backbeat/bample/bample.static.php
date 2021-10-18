@@ -55,16 +55,22 @@
     
     <!-- [ HEADER ] -->
     <? require_once("C:/Soft/XAMPP/htdocs/PHP/backbeat/backbeat/Route/../../app/MVC/views/components/Header.php") ?>
-    <? require_once("C:/Soft/XAMPP/htdocs/PHP/backbeat/backbeat/Route/../../app/MVC/views/components/Footer.php") ?>
-
-
+    
     <!-- [ MAIN ] -->
     <main>
-
+        
         <h1> Backbeat. Home </h1>
         <p>a simple PHP backend-framework</p>
 
+        <? $stack = ['html', 'js', 'sass'] ?>
+        <? foreach( $stack as $value ): ?>
+            <span> <?=  $value . 'sc'  ?> </span>
+        <? endforeach; ?>
+        
     </main>
+    
+    <!-- [ FOOTER ] -->
+    <? require_once("C:/Soft/XAMPP/htdocs/PHP/backbeat/backbeat/Route/../../app/MVC/views/components/Footer.php") ?>
 
 </body>
 </html>
