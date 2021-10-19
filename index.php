@@ -21,11 +21,5 @@
     // require > static file ( page container )
     Bample::requireStatic();
 
-    $reg_exp = '/({\s*((\$\w+))\s*[\+\-\:\*\.]?\s*((\$\w*)|\d*)\s*})|({\s*\d+\s+[\+\-\:\*]+\s*((\$\w*)|\d*)\s*})/';
-    $expr = '{ $var }';
-    if( preg_match( $reg_exp , $expr ) ) {
-        echo "<b>MATCH! </b> <br>";
-    }
-
 
 ?>

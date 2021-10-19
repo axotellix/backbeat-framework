@@ -63,7 +63,9 @@
         <p>a simple PHP backend-framework</p>
 
         
-        <? $stack = ['html', 'js', 'sass']; $a = 'str'; ?>
+        @php
+            $stack = ['html', 'js', 'sass']; $a = 'str';
+        @endphp
         
         <p>{ $a }</p>
 

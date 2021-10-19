@@ -70,28 +70,6 @@ abstract class Bample {
         return $ctx;
     }
 
-    //@ process > Loops
-    protected static function processLoops( $ctx ) {
-
-        // process > foreach loops
-        while( strpos($ctx, '@foreach') > -1 ) {
-
-            // get > params ( Array & Value )
-            $params_start   = strpos( $ctx , '@foreach(' ) + 9;
-            $params_end     = strpos( $ctx , ')' , $params_start) - $params_start;
-            $params         = substr( $ctx , $params_start, $params_end );
-            [ $arr , $val ] = explode( 'as' , $params);
-
-            // replace > Bample syntax
-            $ctx = preg_replace( '/@foreach(.+)/' , "<? foreach($params): ?>" , $ctx , 1);
-            $ctx = preg_replace( '/@endforeach/' , "<? endforeach; ?>" , $ctx , 1);
-
-        }
-
-        // return > normalised syntax
-        return $ctx;
-    }
-
     //@ process > Dynamic outputs
     protected static function processOutputs( $ctx ) {
 
@@ -127,6 +105,45 @@ abstract class Bample {
         return $ctx;
     }
 
+    //@ process > Loops
+    protected static function processLoops( $ctx ) {
+
+        // process > foreach loops
+        while( strpos($ctx, '@foreach') > -1 ) {
+
+            // get > params ( Array & Value )
+            $params_start   = strpos( $ctx , '@foreach(' ) + 9;
+            $params_end     = strpos( $ctx , ')' , $params_start) - $params_start;
+            $params         = substr( $ctx , $params_start, $params_end );
+            [ $arr , $val ] = explode( 'as' , $params);
+
+            // replace > Bample syntax
+            $ctx = preg_replace( '/@foreach(.+)/' , "<? foreach($params): ?>" , $ctx , 1);
+            $ctx = preg_replace( '/@endforeach/' , "<? endforeach; ?>" , $ctx , 1);
+
+        }
+
+        // return > normalised syntax
+        return $ctx;
+    }
+
+    //@ process > Code Inserts
+    protected static function processCodeInserts( $ctx ) {
+
+        // process > foreach loops
+        while( strpos($ctx, '@php') > -1 ) {
+
+            // replace > Bample syntax
+            $ctx = preg_replace( '/@php/' , "<?" , $ctx , 1);
+            $ctx = preg_replace( '/@endphp/' , "?>" , $ctx , 1);
+
+        }
+
+        // return > normalised syntax
+        return $ctx;
+    }
+
+
     //@ replace > Bample syntax
     public static function processSyntax( $ctx ) {
 
@@ -141,6 +158,9 @@ abstract class Bample {
 
         // process > loops
         $ctx = self::processLoops( $ctx );
+
+        // process > loops
+        $ctx = self::processCodeInserts( $ctx );
 
         // return > normalised syntax
         return $ctx;
