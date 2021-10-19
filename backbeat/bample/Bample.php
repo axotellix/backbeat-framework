@@ -46,7 +46,7 @@ abstract class Bample {
             $param       = str_replace('\\', '/', $param);
 
             // replace > Bample syntax
-            $ctx = preg_replace( "/@component(.*)/" , "<? require_once($param) ?>" , $ctx , 1);
+            $ctx = preg_replace( '/@component(.+)/' , "<? require_once($param) ?>" , $ctx , 1);
 
         }
 
@@ -62,7 +62,7 @@ abstract class Bample {
             $param       = str_replace('\\', '/', $param);
 
             // replace > Bample syntax
-            $ctx = preg_replace( "/@include(.*)/" , "<? require_once($param) ?>" , $ctx , 1);
+            $ctx = preg_replace( '/@include(.+)/' , "<? require_once($param) ?>" , $ctx , 1);
 
         }
 
@@ -83,8 +83,8 @@ abstract class Bample {
             [ $arr , $val ] = explode( 'as' , $params);
 
             // replace > Bample syntax
-            $ctx = preg_replace( "/@foreach(.*)/" , "<? foreach($params): ?>" , $ctx , 1);
-            $ctx = preg_replace( "/@endforeach/" , "<? endforeach; ?>" , $ctx , 1);
+            $ctx = preg_replace( '/@foreach(.+)/' , "<? foreach($params): ?>" , $ctx , 1);
+            $ctx = preg_replace( '/@endforeach/' , "<? endforeach; ?>" , $ctx , 1);
 
         }
 
@@ -103,22 +103,22 @@ abstract class Bample {
 
             // get > params ( Array & Value )
             $expr_start = strpos( $ctx_cache , '{' ) + 1;
-            $expr_end   = strpos( $ctx , '}' , $expr_start) - $expr_start;
+            $expr_end   = strpos( $ctx_cache , '}' , $expr_start) - $expr_start;
             $expr       = substr( $ctx , $expr_start, $expr_end );
             
-
             // define > RegExp ( what Dynamic output should look like ) 
-            $reg_exp = '/(((\$\w+))\s*[\+\-\:\*\.]?\s*((\$\w*)|\d*))|(\d+\s*[\+\-\:\*]+\s*((\$\w*)|\d*))/';
+            $reg_exp = '/(((\$\w+))\s*[\+\-\:\*\.]?\s*((\$\w*)|\d*))|(\d+\s+[\+\-\:\*]+\s*((\$\w*)|\d*))/';
 
-            // check > if expression is a Dynamic output
+            //? if > expression is a Dynamic output
             if( preg_match( $reg_exp , $expr ) ) {
                 // replace > Bample syntax
-                $ctx = preg_replace( "/{.*}/" , "<?= $expr ?>" , $ctx , 1);
+                $ctx = preg_replace( '/{.+}/' , "<?= $expr ?>" , $ctx , 1);
+                $ctx_cache = preg_replace( '/{.+}/' , "<?= $expr ?>" , $ctx_cache , 1);
             }
             //? if > NOT a Dynamic output (css declarations, etc.)  
             else {
                 // skip > irrelevant match on next iterations
-                $ctx_cache = preg_replace( "/{/" , "~" , $ctx_cache , 1);
+                $ctx_cache = preg_replace( '/{/' , "~" , $ctx_cache , 1);
             }
 
         }
@@ -136,13 +136,15 @@ abstract class Bample {
         // process > includes
         $ctx = self::processIncludes( $ctx );
 
-        // process > loops
-        $ctx = self::processLoops( $ctx );
-
         // process > dynamic outputs
         $ctx = self::processOutputs( $ctx );
 
+        // process > loops
+        $ctx = self::processLoops( $ctx );
+
+        // return > normalised syntax
         return $ctx;
+
     }
 
 
@@ -170,6 +172,7 @@ abstract class Bample {
 
         // save > new content to static file
         file_put_contents( self::$static , self::$ctx );
+
     }
 
 
@@ -180,20 +183,5 @@ abstract class Bample {
 
 }
 
-
-
-    // function Bample() {
-
-    //     $caller = debug_backtrace()[0]['file'];
-    //     $ctx = file_get_contents( $caller );
-
-    //     $caller = str_replace( 'index.php' , 'app\MVC\views\pages\about.php' , $caller );
-    //     str_replace( 'simple' , 'cool' , $ctx );
-
-    //     ob_start();
-    //     //require_once $caller;
-    //     echo ob_get_clean();
-
-    // }
 
 ?>

@@ -62,7 +62,11 @@
         <h1> Backbeat. Home </h1>
         <p>a simple PHP backend-framework</p>
 
-        <? $stack = ['html', 'js', 'sass'] ?>
+        
+        <? $stack = ['html', 'js', 'sass']; $a = 'str'; ?>
+        
+        <p>{ $a }</p>
+
         @foreach( $stack as $value )
             <span> { $value } </span>
         @endforeach
