@@ -2,8 +2,8 @@
 <?php
 
 // [ PRESETS ] 
-$_PATH   = parse_ini_file(__DIR__ . '../../backbeat.conf');
-$_CONFIG = parse_ini_file(__DIR__ . $_PATH . '/db.conf');
+$_PATH   = parse_ini_file(__DIR__ . '/../../backbeat.conf');
+$_CONFIG = parse_ini_file(__DIR__ . "/../../{$_PATH['DB_CONF']}" . '/db.conf');
 $_TYPE   = $_CONFIG['TYPE'];
 $_HOST   = $_CONFIG['HOST'];
 $_DB     = $_CONFIG['DB'];

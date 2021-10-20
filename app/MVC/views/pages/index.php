@@ -64,7 +64,8 @@
 
         
         @php
-            $stack = ['html', 'js', 'sass']; $a = 'str';
+            $stack = ['html', 'js', 'sass']; 
+            $a = 'str';
         @endphp
         
         <p>{ $a }</p>

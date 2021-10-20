@@ -1,9 +1,11 @@
-
 <?php
+
+namespace Backbeat;
  
 // [ establish > connection ]
-$conn_path = __DIR__ . '/db_connect.php';
-require($conn_path);
+$conn_path = 'db_connect.php';
+require_once($conn_path);
+
 
 class Schema {
 
@@ -30,7 +32,8 @@ class Schema {
     private static $update_query = '';  // store > update query (field = value)
 
     // [ filtering presets ]
-    private static $rec_amount = 0;     // store > amount of records to request
+    private static $limit      = '';    // store > LIMIT filter
+    private static $rec_amount = null;  // store > amount of records to request
     private static $src = [             // store > value to select a particular record (search)
         'field'      => null,
         'expression' => null,
@@ -52,7 +55,7 @@ class Schema {
     public static function all() {
         self::$sql_type = 'select';
         self::$fields = ['*'];
-        return new static;
+        return self::get();
     }
      //@ set > amount of records to request
     public static function select( ...$fields ) {
@@ -110,10 +113,10 @@ class Schema {
      //@ set > amount of records to request
     public static function take( int $n ) {
 
-        //? if > selection method was not applied - consider we need * records
-        if( empty($fields) || $fields[0] != '*' ) {
-            self::$fields = ['*'];
-        } 
+        //? if > selection method was not applied - consider we need * fields
+        // if( empty($fields) || $fields[0] != '*' ) {      //FIX: chain methods
+        //     self::$fields = ['*'];
+        // } 
 
         self::$sql_type = 'select';
         self::$rec_amount = $n;
@@ -125,18 +128,18 @@ class Schema {
         self::$fields = $fields;
         return new static;
     }
-     //@ set > DB fields to select
+     //@ set > record filter
     public static function where( string $field , string $expr, $value ) {
         self::$src = [ 'field' => $field, 'expression' => $expr, 'value' => $value ];
         return new static;
     }
 
     // [ SQL request methods ]
-     //@ set > DB fields to select
+     //@ return > results
     public static function get() {
         self::$sql_type = 'select';
         self::buildSQL();
-        return $_POST['pdo']->query(self::$sql);
+        return $_POST['pdo']->query(self::$sql)->fetchAll(\PDO::FETCH_OBJ);
     }
      //@ prepare > SQL query
     public static function prepareSQL() {
@@ -157,10 +160,14 @@ class Schema {
         } else {
             $filter = '';
         } 
+        // define > LIMIT filter query (if exists)
+        if( self::$rec_amount !== null ) {
+            $filter .= ' LIMIT ' . self::$rec_amount;
+        }
 
         // define > SQL query
         if( self::$sql_type == 'select' ) {
-            self::$sql = $sql_cmd . " $fields_str FROM " . self::$table . " $filter";
+            self::$sql = "$sql_cmd $fields_str FROM " . self::$table . " $filter";
         } else if( self::$sql_type == 'insert' ) {
             self::$sql = $sql_cmd ." " . self::$table . " ($fields_str) " . $filter . "VALUES ($values_str)";
         } else if( self::$sql_type == 'delete' ) {

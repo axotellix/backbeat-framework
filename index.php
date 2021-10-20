@@ -11,6 +11,9 @@
     // });
 
     require_once('backbeat/bample/Bample.php');
+    require_once('backbeat/db/Schema.php');
+    require_once('backbeat/MVC/Model.php');
+    require_once('app/MVC/models/Image.php');
     require_once('app/MVC/controllers/HomeController.php');
     require_once('backbeat/Route/Route.php');
     require_once('app/routes.php');

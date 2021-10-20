@@ -1,6 +1,7 @@
 <?php
 
 namespace Backbeat;
+use Backbeat\Models\Image;
 
 
 // class HomeController extends Controller {
@@ -8,7 +9,16 @@ class HomeController {
 
     public function index() {
 
-        return view('pages/index');
+        //print_r( Image::all() );
+        //$imgs = Schema::table('images')->all();
+        $imgs = Image::select('id')->take(2)->get();
+
+        foreach( $imgs as $img ) {
+            echo $img->id . "<br>";
+        }
+
+        //return view('pages/index');
+
         //echo 'done';
         // get > cards
         //$cards = Card::all();

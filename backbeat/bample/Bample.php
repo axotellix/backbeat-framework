@@ -130,7 +130,7 @@ abstract class Bample {
     //@ process > Code Inserts
     protected static function processCodeInserts( $ctx ) {
 
-        // process > foreach loops
+        // process > code inserts ( php code )
         while( strpos($ctx, '@php') > -1 ) {
 
             // replace > Bample syntax
