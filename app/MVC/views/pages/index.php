@@ -34,6 +34,13 @@
             margin-top: 0;
             margin-bottom: 30px;
         }
+        span {
+            line-height: 1.5em;
+            color: #2C2F42;
+            font-size: 1.5rem;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
         a {
             display: inline-block;
             color: #252536;
@@ -63,7 +70,7 @@
         <p>a simple PHP backend-framework</p>
 
         @foreach( $imgs as $img )
-            {$img->URL};
+            <span> { $img->URL } </span>
         @endforeach
         
         @php

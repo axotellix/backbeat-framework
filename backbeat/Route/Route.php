@@ -29,10 +29,11 @@ function check_404( string $v = null ) {
 
     //? if > View NOT found
     if( !file_exists($v) ) {
-
+        
         // return > View ( 404 page )
         $v = make_path('404');
-        Bample::setStatic( $v );
+        $view = [ 'view' => $v ];
+        Bample::setStatic( $view );
 
         // set > Status code to 404
         Route::setStatus(404);

@@ -185,9 +185,11 @@ abstract class Bample {
         $path = '"' . $path . '"';
 
         // inject > data passed
-        foreach( $view['data'] as $var => $val ) {
-            $_POST[$var] = $val;
-            self::$ctx = "<? $$var = " . '$_POST['."'$var'".']' . " ?>" . self::$ctx;
+        if( array_key_exists('data' , $view) ) {
+            foreach( $view['data'] as $var => $val ) {
+                $_POST[$var] = $val;
+                self::$ctx = "<? $$var = " . '$_POST['."'$var'".']' . " ?>" . self::$ctx;
+            }
         }
 
         // replace > DIR constants ( change static file location to requested page`s one )
