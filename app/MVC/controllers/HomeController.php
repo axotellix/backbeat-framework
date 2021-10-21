@@ -9,15 +9,9 @@ class HomeController {
 
     public function index() {
 
-        //print_r( Image::all() );
-        //$imgs = Schema::table('images')->all();
-        $imgs = Image::select('id')->take(2)->get();
+        $imgs = Image::all();
 
-        foreach( $imgs as $img ) {
-            echo $img->URL . "<br>";
-        }
-
-        //return view('pages/index');
+        return view('pages/index', ['imgs' => $imgs]);
 
         //echo 'done';
         // get > cards

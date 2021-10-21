@@ -175,14 +175,20 @@ abstract class Bample {
     public static function setStatic( $view ) {
 
         // get > requested page content
-        self::$ctx = file_get_contents( $view );
+        self::$ctx = file_get_contents( $view['view'] );
 
         // get > requested page full path
-        $path = explode('/', $view);
+        $path = explode('/', $view['view']);
         array_pop($path);                       // remove > filename from URL
         $path = implode('/', $path);
         $path = str_replace('\\', '/', $path);
         $path = '"' . $path . '"';
+
+        // inject > data passed
+        foreach( $view['data'] as $var => $val ) {
+            $_POST[$var] = $val;
+            self::$ctx = "<? $$var = " . '$_POST['."'$var'".']' . " ?>" . self::$ctx;
+        }
 
         // replace > DIR constants ( change static file location to requested page`s one )
         self::$ctx = preg_replace( '/__DIR__/' , $path , self::$ctx );

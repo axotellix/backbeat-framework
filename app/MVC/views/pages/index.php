@@ -62,6 +62,9 @@
         <h1> Backbeat. Home </h1>
         <p>a simple PHP backend-framework</p>
 
+        @foreach( $imgs as $img )
+            {$img->URL};
+        @endforeach
         
         @php
             $stack = ['html', 'js', 'sass']; 

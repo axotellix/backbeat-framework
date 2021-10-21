@@ -60,7 +60,7 @@ function view( string $view_name , array $view_data = [] ) {
     ];
 
     // return > View (with data)
-    Bample::setStatic( $view['view'] );
+    Bample::setStatic( $view );
 
 }
 
