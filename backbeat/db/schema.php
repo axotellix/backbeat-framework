@@ -114,9 +114,9 @@ class Schema {
     public static function take( int $n ) {
 
         //? if > selection method was not applied - consider we need * fields
-        // if( empty($fields) || $fields[0] != '*' ) {      //FIX: chain methods
-        //     self::$fields = ['*'];
-        // } 
+        if( empty(self::$fields) || self::$fields[0] === '*' ) {
+            self::$fields = ['*'];
+        } 
 
         self::$sql_type = 'select';
         self::$rec_amount = $n;

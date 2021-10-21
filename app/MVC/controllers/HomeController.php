@@ -14,7 +14,7 @@ class HomeController {
         $imgs = Image::select('id')->take(2)->get();
 
         foreach( $imgs as $img ) {
-            echo $img->id . "<br>";
+            echo $img->URL . "<br>";
         }
 
         //return view('pages/index');
