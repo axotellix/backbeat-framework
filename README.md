@@ -1,4 +1,4 @@
-![backbeat-cover](https://i.ibb.co/XbyNprJ/backbeat-cover.png)
+![backbeat-cover](https://i.ibb.co/DYKXXgk/backbeat-cover.png)
 A simple backend-framework for PHP. <br/><br/>
 **Features:**
 - MVC
