@@ -1,4 +1,4 @@
-![backbeat-cover](https://i.ibb.co/DYKXXgk/backbeat-cover.png)
+<img width="100%" src="https://github.com/axotellix/git-assets/blob/images/backbeat/Cover.png">  
 A simple backend-framework for PHP. <br/><br/>
 **Features:**
 - MVC
