@@ -24,6 +24,8 @@ A simple backend-framework for PHP. <br/><br/>
 ## 05. Model: ActiveRecord
 ![activerecord](https://github.com/axotellix/git-assets/blob/images/backbeat/ActiveRecord.png)
 
+![inspired-by-laravel](https://github.com/axotellix/git-assets/blob/images/backbeat/InspiredBy.png)
+
 
 
 
