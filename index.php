@@ -15,6 +15,7 @@
     require_once('backbeat/MVC/Model.php');
     require_once('app/MVC/models/Image.php');
     require_once('app/MVC/controllers/HomeController.php');
+    require_once('app/MVC/controllers/ImageController.php');
     require_once('backbeat/Route/Route.php');
     require_once('app/routes.php');
     
@@ -26,3 +27,4 @@
 
 
 ?>
+<!-- <img src="road1.jpg"> -->

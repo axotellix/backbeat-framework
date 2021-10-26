@@ -56,6 +56,29 @@
             color: Orange;
             border-color: Orange;
         }
+        form {
+            display: flex;
+            width: 500px;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        input {
+            box-sizing: border-box;
+            width: 100%; height: 40px;
+            padding: 0 12px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            margin: 10px 0;
+            transition: all 0.25s;
+        }
+        input[type='submit'] {
+            cursor: pointer;
+            color: #333;
+        }
+        input[type='submit']:hover {
+            background: #ddd;
+        }
     </style>
 </head>
 <body>
@@ -66,27 +89,15 @@
     <!-- [ MAIN ] -->
     <main>
         
-        <h1> Backbeat. Home </h1>
-        <p>a simple PHP backend-framework</p>
+        <h1> Backbeat. Create </h1>
+        <p>create a new image</p>
 
-        @php
-            $path = "/public/assets/img/";
-        @endphp
+        <form action="/create" method = "POST">
+            <input name = 'URL' placeholder = 'URL ...' />
+            <input name = 'description' placeholder = 'Description ...' />
+            <input type = 'submit' value = 'create' />
+        </form>
 
-        @foreach( $imgs as $img )
-            <!-- <img src = "{$path . $img->URL }"> -->
-        @endforeach
-        
-        @php
-            $stack = ['html', 'js', 'sass']; 
-            $a = 'str';
-        @endphp
-        
-        <p>{ $a }</p>
-
-        @foreach( $stack as $value )
-            <span> { $value } </span>
-        @endforeach
         
     </main>
     

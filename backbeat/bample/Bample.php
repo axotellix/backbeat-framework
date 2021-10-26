@@ -175,10 +175,10 @@ abstract class Bample {
     public static function setStatic( $view ) {
 
         // get > requested page content
-        self::$ctx = file_get_contents( $view['view'] );
+        self::$ctx = file_get_contents( $view['name'] );
 
         // get > requested page full path
-        $path = explode('/', $view['view']);
+        $path = explode('/', $view['name']);
         array_pop($path);                       // remove > filename from URL
         $path = implode('/', $path);
         $path = str_replace('\\', '/', $path);

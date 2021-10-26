@@ -54,6 +54,13 @@ abstract class Model {
         return self::$_schema::table(self::$_table)->take( $n );
     }
 
+    //@ add > records to DB
+    public static function add( array $arr ) {
+        self::makeInstance();
+        self::getTable();
+        return self::$_schema::table(self::$_table)->add( $arr );
+    }
+
     
 
 }

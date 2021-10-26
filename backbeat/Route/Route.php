@@ -32,7 +32,7 @@ function check_404( string $v = null ) {
         
         // return > View ( 404 page )
         $v = make_path('404');
-        $view = [ 'view' => $v ];
+        $view = [ 'name' => $v ];
         Bample::setStatic( $view );
 
         // set > Status code to 404
@@ -56,7 +56,7 @@ function view( string $view_name , array $view_data = [] ) {
 
     // prepare > View data
     $view = [ 
-        'view' => $view_name,
+        'name' => $view_name,
         'data' => $view_data,
     ];
 
@@ -133,6 +133,41 @@ abstract class Route {
 
         }
 
+    }
+
+    //@ process > POST Request
+    public static function post( string $route , $action ) {
+        if( !empty($_POST) && count($_POST) != 1 && !empty($_POST['pdo']) ) {
+
+            // get > URI
+            self::$uri = self::getURI();
+
+            // check > if route matches URI
+            if( self::$uri === $route ) {
+
+                //? if > Controller@action passed 
+                if( gettype($action) === 'string' ) {
+
+                    // get > Controller name & Controller action
+                    [$controller_name , $action_name] = explode('@', $action);
+                    $controller_name = 'Backbeat\\' . $controller_name;
+
+                    // create > Controller instance
+                    $controller = new $controller_name;
+
+                    // execute > action
+                    $controller->$action_name();
+
+                } 
+                //? if > function passed 
+                else {
+                    // execute > action
+                    $action();
+                }
+
+            }
+            
+        }
     }
 
 
