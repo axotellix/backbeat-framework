@@ -1,4 +1,4 @@
-<img width="100%" src="https://github.com/axotellix/git-assets/blob/images/backbeat/Cover.png">  
+![backbeat-cover](https://github.com/axotellix/git-assets/blob/images/backbeat/Cover.png)
 A simple backend-framework for PHP. <br/><br/>
 **Features:**
 - MVC
@@ -8,40 +8,16 @@ A simple backend-framework for PHP. <br/><br/>
 # 
 **Based on:** [see basement](https://github.com/axotellix/php-lab9) 
 <br/><br/>
-## Project Structure
+## 01. Project Structure
+![backbeat-project-structure](https://github.com/axotellix/git-assets/blob/images/backbeat/Project-Structure.png)
 
-<div>
-  <img align="left" src="https://i.ibb.co/dtXLpD2/backbeat-project-structure.jpg">  
-
-  <ul>
-    <strong>app:</strong>
-    <li>for everything you create</li>
-  </ul>
-  <ul>
-    <strong>backbeat:</strong>
-    <li>system files - not affected in the workflow</li>
-  </ul>
-  <ul>
-    <strong>root: index.php</strong>
-    <li>Front Controller</li>
-  </ul>
-  
-</div>
-
-<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 ## How to use:
 ... usage examples ...
 
 <br/><br/>
-## Bample: template engine
+## 02. Bample: template engine
+![bample-template-enine](https://github.com/axotellix/git-assets/blob/images/backbeat/Bample.png)
 
-Bample is a template engine that lets you:
-- output dynamic data
-- use loops
-- inject native PHP code
-- include components & other views
-
-<img width="60%" src = "https://i.ibb.co/BfnGpPP/bample-examples.png">
 
 
 
