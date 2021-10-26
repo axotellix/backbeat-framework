@@ -21,6 +21,9 @@ A simple backend-framework for PHP. <br/><br/>
 ## 04. Schema: ORM System
 ![schema-ORM](https://github.com/axotellix/git-assets/blob/images/backbeat/Schema-ORM.png)
 
+## 05. Model: ActiveRecord
+![activerecord](https://github.com/axotellix/git-assets/blob/images/backbeat/ActiveRecord.png)
+
 
 
 
