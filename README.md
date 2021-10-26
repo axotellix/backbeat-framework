@@ -2,8 +2,10 @@
 A simple backend-framework for PHP. <br/><br/>
 **Features:**
 - MVC
+- ORM: Schema
+- ActiveRecord: Model
 - Routing
-- Bample - Template engine
+- Template Engine: Bample
 
 # 
 **Based on:** [see basement](https://github.com/axotellix/php-lab9) 
